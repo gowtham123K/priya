@@ -10,13 +10,13 @@ pipeline{
         }
        stage("Compile Java Code") {
             steps {
-                bat 'javac login.java test.java'
+                bat 'javac Calculator.java CalculatorTest.java'
             }
         }
 
         stage("Run Tests with Assertions") {
             steps {
-                bat 'java -ea test.java'
+                bat 'java -ea CalculatorTest.java'
             }
         }
     }
