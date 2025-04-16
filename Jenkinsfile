@@ -8,31 +8,17 @@ pipeline{
 
             }
         }
-        stage("dependency"){
-            steps{
-                bat '''
-                    python -m venv venv
-                    call venv\\Scripts\\activate
-                    python -m pip install --upgrade pip
-                    pip install pytest
-                '''
+       stage("Compile Java Code") {
+            steps {
+                bat 'javac login.java test.java'
             }
         }
-        stage("testing"){
-            steps{
-                bat '''
-                    call venv\\Scripts\\activate
-                    pytest test.py
-                '''
-            }
-        }
-        stage("deploy"){
-            steps{
-                bat '''
-                    call venv\\Scripts\\activate
-                    python login.py
-                '''
+
+        stage("Run Tests with Assertions") {
+            steps {
+                bat 'java -ea test.java'
             }
         }
     }
 }
+
